@@ -1,0 +1,9 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Example: project-id.firebaseapp.com. Used for OAuth redirects -->
+    <!--<string name="firebase_web_host" translatable="false">CHANGE-ME</string> -->
+
+    <!-- Facebook application ID and custom URL scheme (app ID prefixed by 'fb'). -->
+    <string name="facebook_application_id" translatable="false">419049618605116</string>
+    <string name="facebook_login_protocol_scheme" translatable="false">fb419049618605116</string>
+
+</resources>
