@@ -1,0 +1,62 @@
+{
+  "project_info": {
+    "project_number": "15446373327",
+    "firebase_url": "https://haikyu-27c9e.firebaseio.com",
+    "project_id": "haikyu-27c9e",
+    "storage_bucket": "haikyu-27c9e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:15446373327:android:03e07b749cabebcc",
+        "android_client_info": {
+          "package_name": "processor.haikyuapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "15446373327-7o4ov88pf2dakekk84pjks08drqaf2po.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "processor.haikyuapp",
+            "certificate_hash": "03847479b07102a1c5a2a4029ac30775b2394e2b"
+          }
+        },
+        {
+          "client_id": "15446373327-isef94s671fet4bunef51docskhn4nkf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2p4Vw_gGxShwI0pQpt2mhY0nLPXFBUm0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "15446373327-isef94s671fet4bunef51docskhn4nkf.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "15446373327-dr53upo89jerhlst18iaqnr4nl91btc3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.Haikyu.Haikyu-Project"
+              }
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">HaikyuApp</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Facebook application ID and custom URL scheme (app ID prefixed by 'fb'). -->
+    <string name="facebook_application_id" translatable="false">419049618605116</string>
+    <string name="facebook_login_protocol_scheme" translatable="false">fb419049618605116</string>
 </resources>
