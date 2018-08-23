@@ -11,22 +11,24 @@ tools:context="processor.haikyuapp.LoginActivity">
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+</ScrollView>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:paddingBottom="32dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingBottom="32dp">
 
         <TextView
             style="@style/Base.TextAppearance.AppCompat.Headline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:drawableTop="@drawable/firebase_auth_120dp"
+            android:drawableTop="@drawable/ic_googleg_color_144dp"
             android:text="@string/launch_title" />
 
         <Button
@@ -47,255 +49,7 @@ tools:context="processor.haikyuapp.LoginActivity">
             android:layout_marginBottom="16dp"
             android:text="@string/sign_in_silent" />
 
-        <TextView
-            style="@style/Base.TextAppearance.AppCompat.Subhead"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="@string/providers_header" />
-
-        <CheckBox
-            android:id="@+id/google_provider"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="@string/providers_google" />
-
-        <CheckBox
-            android:id="@+id/facebook_provider"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="@string/providers_facebook" />
-
-        <CheckBox
-            android:id="@+id/email_provider"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="@string/providers_email" />
-
-        <CheckBox
-            android:id="@+id/phone_provider"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="@string/providers_phone" />
-
-        <TextView
-            style="@style/Base.TextAppearance.AppCompat.Subhead"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
-            android:text="@string/theme_header" />
-
-        <RadioGroup
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <RadioButton
-                android:id="@+id/default_theme"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="@string/theme_default" />
-
-            <RadioButton
-                android:id="@+id/purple_theme"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/theme_purple" />
-
-            <RadioButton
-                android:id="@+id/green_theme"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/theme_green" />
-
-            <RadioButton
-                android:id="@+id/dark_theme"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/theme_dark" />
-        </RadioGroup>
-
-        <TextView
-            style="@style/Base.TextAppearance.AppCompat.Subhead"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
-            android:text="@string/logo_header" />
-
-        <RadioGroup
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <RadioButton
-                android:id="@+id/firebase_logo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="@string/logo_firebase" />
-
-            <RadioButton
-                android:id="@+id/google_logo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/logo_google" />
-
-            <RadioButton
-                android:id="@+id/no_logo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/logo_none" />
-
-        </RadioGroup>
-
-        <TextView
-            style="@style/Base.TextAppearance.AppCompat.Subhead"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
-            android:text="@string/tos_header" />
-
-        <RadioGroup
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <RadioButton
-                android:id="@+id/google_tos"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="@string/tos_google" />
-
-            <RadioButton
-                android:id="@+id/firebase_tos"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/tos_firebase" />
-
-        </RadioGroup>
-
-        <TextView
-            style="@style/Base.TextAppearance.AppCompat.Subhead"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
-            android:text="@string/pp_header" />
-
-        <RadioGroup
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <RadioButton
-                android:id="@+id/google_privacy"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="@string/pp_google" />
-
-            <RadioButton
-                android:id="@+id/firebase_privacy"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/pp_firebase" />
-
-        </RadioGroup>
-
-        <TextView
-            android:id="@+id/google_scopes_header"
-            style="@style/Base.TextAppearance.AppCompat.Subhead"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
-            android:text="@string/google_scopes_header" />
-
-        <CheckBox
-            android:id="@+id/google_scope_drive_file"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="false"
-            android:text="@string/google_scope_drive_file" />
-
-        <CheckBox
-            android:id="@+id/google_scope_youtube_data"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="false"
-            android:text="@string/google_scope_youtube_data" />
-
-        <TextView
-            android:id="@+id/facebook_permissions_header"
-            style="@style/Base.TextAppearance.AppCompat.Subhead"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
-            android:text="@string/facebook_permissions_header" />
-
-        <CheckBox
-            android:id="@+id/facebook_permission_friends"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="false"
-            android:text="@string/facebook_permission_friends" />
-
-        <CheckBox
-            android:id="@+id/facebook_permission_photos"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="false"
-            android:text="@string/facebook_permission_photos" />
-
-
-        <TextView
-            style="@style/Base.TextAppearance.AppCompat.Subhead"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
-            android:text="@string/options_header" />
-
-        <CheckBox
-            android:id="@+id/credential_selector_enabled"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="@string/options_enable_credential_selector" />
-
-        <CheckBox
-            android:id="@+id/hint_selector_enabled"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="@string/options_enable_hint_selector" />
-
-        <CheckBox
-            android:id="@+id/allow_new_email_accounts"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="@string/options_allow_new_email_acccount" />
-
-        <CheckBox
-            android:id="@+id/require_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="@string/options_require_name" />
 
     </LinearLayout>
-
-</ScrollView>
 
 </android.support.design.widget.CoordinatorLayout>

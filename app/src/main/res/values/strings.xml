@@ -21,7 +21,7 @@
 <string name="desc_storage">Demonstrates displaying an image from Cloud Storage using Glide.</string>
 
 <!-- Auth UI -->
-<string name="launch_title">FirebaseUI Auth Demo</string>
+<string name="launch_title">Our App!</string>
 <string name="sign_in_start">Start</string>
 <string name="sign_in_silent">Sign in silently</string>
 

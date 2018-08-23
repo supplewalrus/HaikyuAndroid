@@ -26,11 +26,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.RadioButton;
-import android.widget.TextView;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.AuthUI.IdpConfig;
@@ -40,6 +35,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUserMetadata;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +43,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import processor.haikyuapp.utils.Utils;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
@@ -59,39 +54,6 @@ public class LoginActivity extends AppCompatActivity {
 
     @BindView(R.id.root) View mRootView;
 
-    @BindView(R.id.google_provider) CheckBox mUseGoogleProvider;
-    @BindView(R.id.facebook_provider) CheckBox mUseFacebookProvider;
-    @BindView(R.id.email_provider) CheckBox mUseEmailProvider;
-    @BindView(R.id.phone_provider) CheckBox mUsePhoneProvider;
-
-    @BindView(R.id.default_theme) RadioButton mDefaultTheme;
-    @BindView(R.id.green_theme) RadioButton mGreenTheme;
-    @BindView(R.id.purple_theme) RadioButton mPurpleTheme;
-    @BindView(R.id.dark_theme) RadioButton mDarkTheme;
-
-    @BindView(R.id.firebase_logo) RadioButton mFirebaseLogo;
-    @BindView(R.id.google_logo) RadioButton mGoogleLogo;
-    @BindView(R.id.no_logo) RadioButton mNoLogo;
-
-    @BindView(R.id.google_tos) RadioButton mUseGoogleTos;
-    @BindView(R.id.firebase_tos) RadioButton mUseFirebaseTos;
-
-    @BindView(R.id.google_privacy) RadioButton mUseGooglePrivacyPolicy;
-    @BindView(R.id.firebase_privacy) RadioButton mUseFirebasePrivacyPolicy;
-
-    @BindView(R.id.google_scopes_header) TextView mGoogleScopesHeader;
-    @BindView(R.id.google_scope_drive_file) CheckBox mGoogleScopeDriveFile;
-    @BindView(R.id.google_scope_youtube_data) CheckBox mGoogleScopeYoutubeData;
-
-    @BindView(R.id.facebook_permissions_header) TextView mFacebookPermissionsHeader;
-    @BindView(R.id.facebook_permission_friends) CheckBox mFacebookPermissionFriends;
-    @BindView(R.id.facebook_permission_photos) CheckBox mFacebookPermissionPhotos;
-
-    @BindView(R.id.credential_selector_enabled) CheckBox mEnableCredentialSelector;
-    @BindView(R.id.hint_selector_enabled) CheckBox mEnableHintSelector;
-    @BindView(R.id.allow_new_email_accounts) CheckBox mAllowNewEmailAccounts;
-    @BindView(R.id.require_name) CheckBox mRequireName;
-
     public static Intent createIntent(Context context) {
         return new Intent(context, LoginActivity.class);
     }
@@ -99,6 +61,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
@@ -110,33 +73,10 @@ public class LoginActivity extends AppCompatActivity {
                         .setAvailableProviders(getSelectedProviders())
                         .setTosAndPrivacyPolicyUrls(GOOGLE_TOS_URL,
                                 GOOGLE_PRIVACY_POLICY_URL)
-                        .setIsSmartLockEnabled(mEnableCredentialSelector.isChecked(),
-                                mEnableHintSelector.isChecked())
+                        .setIsSmartLockEnabled(true)
                         .build(),
                 RC_SIGN_IN);
-
-        if (Utils.isFacebookMisconfigured(this)) {
-            mUseFacebookProvider.setChecked(false);
-            mUseFacebookProvider.setEnabled(false);
-            mUseFacebookProvider.setText(R.string.facebook_label_missing_config);
-            setFacebookPermissionsEnabled(false);
-        } else {
-            setFacebookPermissionsEnabled(mUseFacebookProvider.isChecked());
-            mUseFacebookProvider.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
-                    setFacebookPermissionsEnabled(checked);
-                }
-            });
-        }
-
-        if (Utils.isGoogleMisconfigured(this)
-                || Utils.isFacebookMisconfigured(this)) {
-            showSnackbar(R.string.configuration_required);
-        }
     }
-
-    //DO THIS FROM THE START
 
     @OnClick(R.id.sign_in)
     public void signIn(View view) {
@@ -147,8 +87,7 @@ public class LoginActivity extends AppCompatActivity {
                         .setAvailableProviders(getSelectedProviders())
                         .setTosAndPrivacyPolicyUrls(GOOGLE_TOS_URL,
                                 GOOGLE_PRIVACY_POLICY_URL)
-                        .setIsSmartLockEnabled(mEnableCredentialSelector.isChecked(),
-                                mEnableHintSelector.isChecked())
+                        .setIsSmartLockEnabled(true)
                         .build(),
                 RC_SIGN_IN);
     }
@@ -188,11 +127,24 @@ public class LoginActivity extends AppCompatActivity {
 
     private void handleSignInResponse(int resultCode, Intent data) {
         final IdpResponse response = IdpResponse.fromResultIntent(data);
+        FirebaseAuth auth = FirebaseAuth.getInstance();
 
-        // Successfully signed in
+        // Successfully signed in. Determine if it's first time or not. Take to a different screen if first time
+        // How to protect from null?
         if (resultCode == RESULT_OK) {
-            startMainActivity(response);
-            finish();
+            FirebaseUserMetadata metadata = auth.getCurrentUser().getMetadata();
+            if (metadata.getCreationTimestamp() == metadata.getLastSignInTimestamp()) {
+                // The user is new, show them a fancy intro screen!
+                System.out.println("FIRST TIME");
+                startMainActivity(response);
+                finish();
+            } else {
+                // This is an existing user, show them a welcome back screen.
+                System.out.println("SECOND TIME");
+                startMainActivity(response);
+                finish();
+            }
+
         } else {
             // Sign in failed
             if (response == null) {
@@ -218,33 +170,22 @@ public class LoginActivity extends AppCompatActivity {
     private List<IdpConfig> getSelectedProviders() {
         List<IdpConfig> selectedProviders = new ArrayList<>();
 
-        if (mUseFacebookProvider.isChecked()) {
             selectedProviders.add(new IdpConfig.FacebookBuilder()
                     .setPermissions(getFacebookPermissions())
                     .build());
-        }
 
-        if (mUsePhoneProvider.isChecked()) {
             selectedProviders.add(new IdpConfig.PhoneBuilder().build());
-        }
 
         return selectedProviders;
     }
 
-    private void setFacebookPermissionsEnabled(boolean enabled) {
-        mFacebookPermissionsHeader.setEnabled(enabled);
-        mFacebookPermissionFriends.setEnabled(enabled);
-        mFacebookPermissionPhotos.setEnabled(enabled);
-    }
-
+    //need to do Oauth stuff to get this working? For user_photos they have to agree?
     private List<String> getFacebookPermissions() {
         List<String> result = new ArrayList<>();
-        if (mFacebookPermissionFriends.isChecked()) {
+
             result.add("user_friends");
-        }
-        if (mFacebookPermissionPhotos.isChecked()) {
             result.add("user_photos");
-        }
+
         return result;
     }
 
