@@ -26,6 +26,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.AuthUI.IdpConfig;
@@ -33,6 +34,7 @@ import com.firebase.ui.auth.ErrorCodes;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.common.base.MoreObjects;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUserMetadata;
@@ -78,34 +80,20 @@ public class LoginActivity extends AppCompatActivity {
                 RC_SIGN_IN);
     }
 
-    @OnClick(R.id.sign_in)
-    public void signIn(View view) {
-        startActivityForResult(
-                AuthUI.getInstance().createSignInIntentBuilder()
-                        .setTheme(R.style.GreenTheme)
-                        .setLogo(R.drawable.ic_googleg_color_144dp)
-                        .setAvailableProviders(getSelectedProviders())
-                        .setTosAndPrivacyPolicyUrls(GOOGLE_TOS_URL,
-                                GOOGLE_PRIVACY_POLICY_URL)
-                        .setIsSmartLockEnabled(true)
-                        .build(),
-                RC_SIGN_IN);
-    }
-
-    @OnClick(R.id.sign_in_silent)
-    public void silentSignIn(View view) {
-        AuthUI.getInstance().silentSignIn(this, getSelectedProviders())
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            startMainActivity(null);
-                        } else {
-                            showSnackbar(R.string.sign_in_failed);
-                        }
-                    }
-                });
-    }
+//    @OnClick(R.id.sign_in_silent)
+//    public void silentSignIn(View view) {
+//        AuthUI.getInstance().silentSignIn(this, getSelectedProviders())
+//                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<AuthResult> task) {
+//                        if (task.isSuccessful()) {
+//                            startMainActivity(null);
+//                        } else {
+//                            showSnackbar(R.string.sign_in_failed);
+//                        }
+//                    }
+//                });
+//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -149,9 +137,21 @@ public class LoginActivity extends AppCompatActivity {
             // Sign in failed
             if (response == null) {
                 // User pressed back button
+                // This is gross. Fix this.
+                startActivityForResult(
+                        AuthUI.getInstance().createSignInIntentBuilder()
+                                .setTheme(R.style.GreenTheme)
+                                .setLogo(R.drawable.ic_googleg_color_144dp)
+                                .setAvailableProviders(getSelectedProviders())
+                                .setTosAndPrivacyPolicyUrls(GOOGLE_TOS_URL,
+                                        GOOGLE_PRIVACY_POLICY_URL)
+                                .setIsSmartLockEnabled(true)
+                                .build(),
+                        RC_SIGN_IN);
+
                 showSnackbar(R.string.sign_in_cancelled);
                 return;
-            }
+        }
 
             if (response.getError().getErrorCode() == ErrorCodes.NO_NETWORK) {
                 showSnackbar(R.string.no_internet_connection);
