@@ -45,6 +45,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import processor.haikyuapp.Chat.ChatActivity;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
@@ -165,6 +166,10 @@ public class LoginActivity extends AppCompatActivity {
 
     private void startMainActivity(IdpResponse response) {
         startActivity(MainActivity.createIntent(this, response));
+    }
+
+    private void startChatActivity(IdpResponse response) {
+        startActivity(ChatActivity.createIntent(this, response));
     }
 
     private List<IdpConfig> getSelectedProviders() {

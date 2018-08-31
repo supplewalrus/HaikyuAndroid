@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://C:\Users\brand\OneDrive\Documents\HaikyuApp\HaikyuAndroid.iml" filepath="C:\Users\brand\OneDrive\Documents\HaikyuApp\HaikyuAndroid.iml" />
+      <module fileurl="file://C:/Users/brand/OneDrive/Documents/HaikyuApp/HaikyuAndroid.iml" filepath="C:/Users/brand/OneDrive/Documents/HaikyuApp/HaikyuAndroid.iml" />
       <module fileurl="file://$PROJECT_DIR$/HaikyuApp.iml" filepath="$PROJECT_DIR$/HaikyuApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>

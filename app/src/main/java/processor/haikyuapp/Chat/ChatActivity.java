@@ -1,6 +1,8 @@
 package processor.haikyuapp.Chat;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,6 +18,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.ui.auth.IdpResponse;
+import com.firebase.ui.auth.util.ExtraConstants;
 import com.firebase.ui.auth.util.ui.ImeHelper;//this is??
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -60,6 +64,12 @@ public class ChatActivity extends AppCompatActivity
 
     @BindView(R.id.emptyTextView)
     TextView mEmptyListMessage;
+
+
+    public static Intent createIntent(Context context, IdpResponse idpResponse) {
+        return new Intent().setClass(context, ChatActivity.class)
+                .putExtra(ExtraConstants.IDP_RESPONSE, idpResponse);
+    }
 
     @SuppressLint("RestrictedApi")
     @Override
