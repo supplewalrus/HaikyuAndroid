@@ -19,4 +19,10 @@
     <color name="material_purple_a700">#AA00FF</color>
     <color name="material_red_a200">#FF5252</color>
 
+    <color name ="mint_primary">#45fba8</color>
+    <color name ="mint_primary_500">#45fba8</color>
+    <color name ="mint_primary_700">#45fba8</color>
+    <color name ="mint_primary_a700">#45fba8</color>
+
+
 </resources>

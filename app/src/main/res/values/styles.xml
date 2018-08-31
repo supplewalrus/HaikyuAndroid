@@ -22,6 +22,13 @@
         <item name="android:windowBackground">@color/material_green_50</item>
     </style>
 
+    <style name="MintTheme">
+        <item name="colorPrimary">@color/mint_primary_500</item>
+        <item name="colorPrimaryDark">@color/mint_primary_700</item>
+        <item name="colorAccent">@color/mint_primary_a700</item>
+        <item name="android:windowBackground">@color/mint_primary</item>
+    </style>
+
     <style name="WarnButton" parent="Widget.AppCompat.Button.Colored">
         <item name="colorButtonNormal">@color/material_red_a200</item>
         <item name="android:textColor">@android:color/white</item>

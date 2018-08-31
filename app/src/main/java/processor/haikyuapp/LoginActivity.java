@@ -71,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
 
         startActivityForResult(
                 AuthUI.getInstance().createSignInIntentBuilder()
-                        .setTheme(R.style.GreenTheme)
+                        .setTheme(R.style.MintTheme)
                         .setLogo(R.drawable.ic_googleg_color_144dp)
                         .setAvailableProviders(getSelectedProviders())
                         .setTosAndPrivacyPolicyUrls(GOOGLE_TOS_URL,
@@ -130,7 +130,7 @@ public class LoginActivity extends AppCompatActivity {
             } else {
                 // This is an existing user, show them a welcome back screen.
                 System.out.println("SECOND TIME");
-                startMainActivity(response);
+                startChatActivity(response);
                 finish();
             }
 
@@ -141,7 +141,7 @@ public class LoginActivity extends AppCompatActivity {
                 // This is gross. Fix this.
                 startActivityForResult(
                         AuthUI.getInstance().createSignInIntentBuilder()
-                                .setTheme(R.style.GreenTheme)
+                                .setTheme(R.style.MintTheme)
                                 .setLogo(R.drawable.ic_googleg_color_144dp)
                                 .setAvailableProviders(getSelectedProviders())
                                 .setTosAndPrivacyPolicyUrls(GOOGLE_TOS_URL,
