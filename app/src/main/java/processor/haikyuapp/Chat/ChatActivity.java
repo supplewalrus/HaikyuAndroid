@@ -66,11 +66,6 @@ public class ChatActivity extends AppCompatActivity
     TextView mEmptyListMessage;
 
 
-    public static Intent createIntent(Context context, IdpResponse idpResponse) {
-        return new Intent().setClass(context, ChatActivity.class)
-                .putExtra(ExtraConstants.IDP_RESPONSE, idpResponse);
-    }
-
     @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

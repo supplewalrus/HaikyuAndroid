@@ -45,7 +45,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import processor.haikyuapp.Chat.ChatActivity;
+import processor.haikyuapp.setup.SetupActivity;
 
 public class LoginActivity extends AppCompatActivity
 {
@@ -115,9 +115,10 @@ public class LoginActivity extends AppCompatActivity
         // Successfully signed in
         if (resultCode == RESULT_OK)
         {
+            //NEW USER. SETUP WORKFLOW
             if(response.isNewUser())
             {
-                startChatActivity(response);
+                startSetupActivity(response);
                 finish();
             }
             else
@@ -153,9 +154,9 @@ public class LoginActivity extends AppCompatActivity
         startActivity(MainActivity.createIntent(this, response));
     }
 
-    private void startChatActivity(IdpResponse response)
+    private void startSetupActivity(IdpResponse response)
     {
-        startActivity(ChatActivity.createIntent(this, response));
+        startActivity(SetupActivity.createIntent(this, response));
     }
 
     private List<IdpConfig> getSelectedProviders()

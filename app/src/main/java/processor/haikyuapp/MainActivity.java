@@ -162,7 +162,6 @@ public class MainActivity extends AppCompatActivity
     {
         IdpResponse response = getIntent().getParcelableExtra(ExtraConstants.IDP_RESPONSE);
         startChatActivity(response);
-        finish();
     }
 
 
@@ -218,180 +217,14 @@ public class MainActivity extends AppCompatActivity
 
     private void startChatActivity(IdpResponse response)
     {
-        Intent mIntent = new Intent(this, Example.class);
-        mIntent.putExtra(key, value);
+        Intent intent = new Intent(this, ChatActivity.class);
+        startActivity(intent);
 
         //startActivity(LoginActivity.createIntent(MainActivity.this));
-        startActivity(ChatActivity.createIntent(MainActivity.this, response));
+        //startActivity(ChatActivity.createIntent(MainActivity.this, response));
     }
 
     private void showSnackbar(@StringRes int errorMessageRes) {
         Snackbar.make(mRootView, errorMessageRes, Snackbar.LENGTH_LONG).show();
     }
-
 }
-
-
-
-
-
-//myevents, browse, settings
-
-//public class MainActivity extends AppCompatActivity {
-//    private static final String TAG = "SignedInActivity";
-//
-//    @BindView(android.R.id.content) View mRootView;
-//
-//    @BindView(R.id.user_profile_picture) ImageView mUserProfilePicture;
-//    @BindView(R.id.user_email) TextView mUserEmail;
-//    @BindView(R.id.user_display_name) TextView mUserDisplayName;
-//    @BindView(R.id.user_phone_number) TextView mUserPhoneNumber;
-//    @BindView(R.id.user_enabled_providers) TextView mEnabledProviders;
-//    @BindView(R.id.user_is_new) TextView mIsNewUser;
-//
-//    public static Intent createIntent(Context context, IdpResponse idpResponse) {
-//        return new Intent().setClass(context, MainActivity.class)
-//                .putExtra(ExtraConstants.IDP_RESPONSE, idpResponse);
-//    }
-//
-//    @Override
-//    public void onCreate(@Nullable Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//
-//        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-//        if (currentUser == null) {
-//            startActivity(LoginActivity.createIntent(this));
-//            finish();
-//            return;
-//        }
-//
-//        IdpResponse response = getIntent().getParcelableExtra(ExtraConstants.IDP_RESPONSE);
-//
-//        setContentView(R.layout.activity_main);
-//        ButterKnife.bind(this);
-//        populateProfile(response);
-//        populateIdpToken(response);
-//    }
-//
-//    @OnClick(R.id.sign_out)
-//    public void signOut() {
-//        AuthUI.getInstance()
-//                .signOut(this)
-//                .addOnCompleteListener(new OnCompleteListener<Void>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<Void> task) {
-//                        if (task.isSuccessful()) {
-//                            startActivity(LoginActivity.createIntent(MainActivity.this));
-//                            finish();
-//                        } else {
-//                            Log.w(TAG, "signOut:failure", task.getException());
-//                            showSnackbar(R.string.sign_out_failed);
-//                        }
-//                    }
-//                });
-//    }
-//
-//    @OnClick(R.id.delete_account)
-//    public void deleteAccountClicked() {
-//        new AlertDialog.Builder(this)
-//                .setMessage("Are you sure you want to delete this account?")
-//                .setPositiveButton("Yes, nuke it!", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int i) {
-//                        deleteAccount();
-//                    }
-//                })
-//                .setNegativeButton("No", null)
-//                .show();
-//    }
-//
-//    private void deleteAccount() {
-//        AuthUI.getInstance()
-//                .delete(this)
-//                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<Void> task) {
-//                        if (task.isSuccessful()) {
-//                            startActivity(LoginActivity.createIntent(MainActivity.this));
-//                            finish();
-//                        } else {
-//                            showSnackbar(R.string.delete_account_failed);
-//                        }
-//                    }
-//                });
-//    }
-//
-//    private void populateProfile(@Nullable IdpResponse response) {
-//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//        if (user.getPhotoUrl() != null) {
-//            GlideApp.with(this)
-//                    .load(user.getPhotoUrl())
-//                    .fitCenter()
-//                    .into(mUserProfilePicture);
-//        }
-//
-//        mUserEmail.setText(
-//                TextUtils.isEmpty(user.getEmail()) ? "No email" : user.getEmail());
-//        mUserPhoneNumber.setText(
-//                TextUtils.isEmpty(user.getPhoneNumber()) ? "No phone number" : user.getPhoneNumber());
-//        mUserDisplayName.setText(
-//                TextUtils.isEmpty(user.getDisplayName()) ? "No display name" : user.getDisplayName());
-//
-//        if (response == null) {
-//            mIsNewUser.setVisibility(View.GONE);
-//        } else {
-//            mIsNewUser.setVisibility(View.VISIBLE);
-//            mIsNewUser.setText(response.isNewUser() ? "New user" : "Existing user");
-//        }
-////
-//        List<String> providers = new ArrayList<>();
-//        if (user.getProviderData().isEmpty()) {
-//            providers.add("Anonymous");
-//        } else {
-//            for (UserInfo info : user.getProviderData()) {
-//                switch (info.getProviderId()) {
-//                    case FacebookAuthProvider.PROVIDER_ID:
-//                        providers.add(getString(R.string.providers_facebook));
-//                        break;
-//                    case FirebaseAuthProvider.PROVIDER_ID:
-//                        // Ignore this provider, it's not very meaningful
-//                        break;
-//                    default:
-//                        throw new IllegalStateException(
-//                                "Unknown provider: " + info.getProviderId());
-//                }
-//            }
-//        }
-//
-//        mEnabledProviders.setText(getString(R.string.used_providers, providers));
-//    }
-//
-//    private void populateIdpToken(@Nullable IdpResponse response) {
-//        String token = null;
-//        String secret = null;
-//        if (response != null) {
-//            token = response.getIdpToken();
-//            secret = response.getIdpSecret();
-//        }
-//
-////        View idpTokenLayout = findViewById(R.id.idp_token_layout);
-////        if (token == null) {
-////            idpTokenLayout.setVisibility(View.GONE);
-////        } else {
-////            idpTokenLayout.setVisibility(View.VISIBLE);
-////            ((TextView) findViewById(R.id.idp_token)).setText(token);
-////        }
-////
-////        View idpSecretLayout = findViewById(R.id.idp_secret_layout);
-////        if (secret == null) {
-////            idpSecretLayout.setVisibility(View.GONE);
-////        } else {
-////            idpSecretLayout.setVisibility(View.VISIBLE);
-////            ((TextView) findViewById(R.id.idp_secret)).setText(secret);
-////        }
-//    }
-//
-//    private void showSnackbar(@StringRes int errorMessageRes) {
-//        Snackbar.make(mRootView, errorMessageRes, Snackbar.LENGTH_LONG).show();
-//    }
-//}
