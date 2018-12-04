@@ -47,7 +47,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import processor.haikyuapp.Chat.ChatActivity;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity
+{
     private static final String TAG = "LoginActivity";
 
     private static final String GOOGLE_TOS_URL = "https://www.google.com/policies/terms/";
@@ -55,14 +56,17 @@ public class LoginActivity extends AppCompatActivity {
 
     private static final int RC_SIGN_IN = 100;
 
-    @BindView(R.id.root) View mRootView;
+    @BindView(R.id.root)
+    View mRootView;
 
-    public static Intent createIntent(Context context) {
+    public static Intent createIntent(Context context)
+    {
         return new Intent(context, LoginActivity.class);
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_login);
@@ -71,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
 
         startActivityForResult(
                 AuthUI.getInstance().createSignInIntentBuilder()
-                        .setTheme(R.style.MintTheme)
+                        //.setTheme(R.style.MintTheme)
                         .setLogo(R.drawable.ic_googleg_color_144dp)
                         .setAvailableProviders(getSelectedProviders())
                         .setTosAndPrivacyPolicyUrls(GOOGLE_TOS_URL,
@@ -81,80 +85,59 @@ public class LoginActivity extends AppCompatActivity {
                 RC_SIGN_IN);
     }
 
-//    @OnClick(R.id.sign_in_silent)
-//    public void silentSignIn(View view) {
-//        AuthUI.getInstance().silentSignIn(this, getSelectedProviders())
-//                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<AuthResult> task) {
-//                        if (task.isSuccessful()) {
-//                            startMainActivity(null);
-//                        } else {
-//                            showSnackbar(R.string.sign_in_failed);
-//                        }
-//                    }
-//                });
-//    }
-
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == RC_SIGN_IN) {
+        if (requestCode == RC_SIGN_IN)
+        {
             handleSignInResponse(resultCode, data);
         }
     }
 
     @Override
-    protected void onResume() {
+    protected void onResume()
+    {
         super.onResume();
         FirebaseAuth auth = FirebaseAuth.getInstance();
-        if (auth.getCurrentUser() != null) {
+        if (auth.getCurrentUser() != null)
+        {
             startMainActivity(null);
             finish();
         }
     }
 
-    private void handleSignInResponse(int resultCode, Intent data) {
-        final IdpResponse response = IdpResponse.fromResultIntent(data);
-        FirebaseAuth auth = FirebaseAuth.getInstance();
 
-        // Successfully signed in. Determine if it's first time or not. Take to a different screen if first time
-        // How to protect from null?
-        if (resultCode == RESULT_OK) {
-            FirebaseUserMetadata metadata = auth.getCurrentUser().getMetadata();
-            if (metadata.getCreationTimestamp() == metadata.getLastSignInTimestamp()) {
-                // The user is new, show them a fancy intro screen!
-                System.out.println("FIRST TIME");
-                startMainActivity(response);
-                finish();
-            } else {
-                // This is an existing user, show them a welcome back screen.
-                System.out.println("SECOND TIME");
+    private void handleSignInResponse(int resultCode, @Nullable Intent data)
+    {
+        IdpResponse response = IdpResponse.fromResultIntent(data);
+
+        // Successfully signed in
+        if (resultCode == RESULT_OK)
+        {
+            if(response.isNewUser())
+            {
                 startChatActivity(response);
                 finish();
             }
-
-        } else {
+            else
+            {
+                startMainActivity(response);
+                finish();
+            }
+        }
+        else
+        {
             // Sign in failed
-            if (response == null) {
+            if (response == null)
+            {
                 // User pressed back button
-                // This is gross. Fix this.
-                startActivityForResult(
-                        AuthUI.getInstance().createSignInIntentBuilder()
-                                .setTheme(R.style.MintTheme)
-                                .setLogo(R.drawable.ic_googleg_color_144dp)
-                                .setAvailableProviders(getSelectedProviders())
-                                .setTosAndPrivacyPolicyUrls(GOOGLE_TOS_URL,
-                                        GOOGLE_PRIVACY_POLICY_URL)
-                                .setIsSmartLockEnabled(true)
-                                .build(),
-                        RC_SIGN_IN);
-
                 showSnackbar(R.string.sign_in_cancelled);
                 return;
-        }
+            }
 
-            if (response.getError().getErrorCode() == ErrorCodes.NO_NETWORK) {
+            if (response.getError().getErrorCode() == ErrorCodes.NO_NETWORK)
+            {
                 showSnackbar(R.string.no_internet_connection);
                 return;
             }
@@ -164,37 +147,43 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void startMainActivity(IdpResponse response) {
+
+    private void startMainActivity(IdpResponse response)
+    {
         startActivity(MainActivity.createIntent(this, response));
     }
 
-    private void startChatActivity(IdpResponse response) {
+    private void startChatActivity(IdpResponse response)
+    {
         startActivity(ChatActivity.createIntent(this, response));
     }
 
-    private List<IdpConfig> getSelectedProviders() {
+    private List<IdpConfig> getSelectedProviders()
+    {
         List<IdpConfig> selectedProviders = new ArrayList<>();
 
-            selectedProviders.add(new IdpConfig.FacebookBuilder()
-                    .setPermissions(getFacebookPermissions())
-                    .build());
+        selectedProviders.add(new IdpConfig.FacebookBuilder()
+                .setPermissions(getFacebookPermissions())
+                .build());
 
-            selectedProviders.add(new IdpConfig.PhoneBuilder().build());
+        selectedProviders.add(new IdpConfig.PhoneBuilder().build());
 
         return selectedProviders;
     }
 
     //need to do Oauth stuff to get this working? For user_photos they have to agree?
-    private List<String> getFacebookPermissions() {
+    private List<String> getFacebookPermissions()
+    {
         List<String> result = new ArrayList<>();
 
-            result.add("user_friends");
-            result.add("user_photos");
+        result.add("user_friends");
+        result.add("user_photos");
 
         return result;
     }
 
-    private void showSnackbar(@StringRes int errorMessageRes) {
+    private void showSnackbar(@StringRes int errorMessageRes)
+    {
         Snackbar.make(mRootView, errorMessageRes, Snackbar.LENGTH_LONG).show();
     }
 }

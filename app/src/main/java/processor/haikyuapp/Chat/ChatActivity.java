@@ -45,7 +45,7 @@ import processor.haikyuapp.R;
  */
 public class ChatActivity extends AppCompatActivity
         implements FirebaseAuth.AuthStateListener {
-    private static final String TAG = "RealtimeDatabaseDemo";
+    private static final String TAG = "ChatActivity";
 
     /**
      * Get the last 50 chat messages.
@@ -136,10 +136,9 @@ public class ChatActivity extends AppCompatActivity
     @OnClick(R.id.sendButton)
     public void onSendClick() {
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        String name = "User " + uid.substring(0, 6);
+        String name = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
 
         onAddMessage(new Chat(name, mMessageEdit.getText().toString(), uid));
-
         mMessageEdit.setText("");
     }
 
