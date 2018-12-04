@@ -118,6 +118,7 @@ public class LoginActivity extends AppCompatActivity
             //NEW USER. SETUP WORKFLOW
             if(response.isNewUser())
             {
+                //startMainActivity(response);
                 startSetupActivity(response);
                 finish();
             }
@@ -128,8 +129,7 @@ public class LoginActivity extends AppCompatActivity
             }
         }
         else
-        {
-            // Sign in failed
+        {            // Sign in failed
             if (response == null)
             {
                 // User pressed back button
