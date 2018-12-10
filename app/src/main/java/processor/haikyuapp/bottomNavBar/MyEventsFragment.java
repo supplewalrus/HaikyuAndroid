@@ -19,8 +19,10 @@ import com.firebase.ui.auth.IdpResponse;
 import com.firebase.ui.auth.util.ExtraConstants;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -80,11 +82,12 @@ public class MyEventsFragment extends Fragment {
     private void populateProfile(@Nullable IdpResponse response) {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         Log.d(TAG, "populateProfile: ");
-        if (user.getPhotoUrl() != null) {
-            Glide.with(this)
-                    .load(user.getPhotoUrl())
-                    .into(mUserProfilePicture);
-        }
+//        if (user.getPhotoUrl() != null) {
+//            Glide.with(this)
+//                    .load(user.getPhotoUrl())
+//                    .into(mUserProfilePicture);
+//        }
+        populateProfileImage();
 
         mUserEmail.setText(
                 TextUtils.isEmpty(user.getEmail()) ? "No email" : user.getEmail());
@@ -99,6 +102,33 @@ public class MyEventsFragment extends Fragment {
             mIsNewUser.setVisibility(View.VISIBLE);
             //with this maybe go to different page???
             mIsNewUser.setText(response.isNewUser() ? "New user" : "Existing user");
+        }
+    }
+
+    public void populateProfileImage()
+    {
+        String facebookUserId = "";
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        //ImageView profilePicture = (ImageView) findViewById(R.id.image_profile_picture);
+
+        // find the Facebook profile and get the user's id
+        for(UserInfo profile : user.getProviderData()) {
+            // check if the provider id matches "facebook.com"
+            if(FacebookAuthProvider.PROVIDER_ID.equals(profile.getProviderId())) {
+                facebookUserId = profile.getUid();
+            }
+        }
+
+        // construct the URL to the profile picture, with a custom height
+        // alternatively, use '?type=small|medium|large' instead of ?height=
+        String photoUrl = "https://graph.facebook.com/" + facebookUserId + "/picture?height=500";
+
+        // (optional) use Picasso to download and show to image
+        //Picasso.with(this).load(photoUrl).into(profilePicture);
+        if (user.getPhotoUrl() != null) {
+            Glide.with(this)
+                    .load(photoUrl)
+                    .into(mUserProfilePicture);
         }
     }
 }
