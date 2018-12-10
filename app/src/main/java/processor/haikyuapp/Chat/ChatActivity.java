@@ -42,6 +42,11 @@ import processor.haikyuapp.R;
  * <p>
  * For a general intro to the RecyclerView, see <a href="https://developer.android.com/training/material/lists-cards.html">Creating
  * Lists</a>.
+ *
+ *
+ *
+ *
+ * TO DO: PASS IN WHICH EVENT YOU CLICKED ON, THEN INSTEAD OF CALLING CHAT, CALL THAT SPECIFIC CHAT
  */
 public class ChatActivity extends AppCompatActivity
         implements FirebaseAuth.AuthStateListener {
@@ -50,8 +55,8 @@ public class ChatActivity extends AppCompatActivity
     /**
      * Get the last 50 chat messages.
      */
-    protected static final Query sChatQuery =
-            FirebaseDatabase.getInstance().getReference().child("chats").limitToLast(50);
+//    protected static final Query sChatQuery =
+//            FirebaseDatabase.getInstance().getReference().child("chats").limitToLast(50);
 
     @BindView(R.id.messagesList)
     RecyclerView mRecyclerView;
@@ -140,7 +145,7 @@ public class ChatActivity extends AppCompatActivity
     protected RecyclerView.Adapter newAdapter() {
         FirebaseRecyclerOptions<Chat> options =
                 new FirebaseRecyclerOptions.Builder<Chat>()
-                        .setQuery(sChatQuery, Chat.class)
+                        .setQuery(sChatQuery(), Chat.class)
                         .setLifecycleOwner(this)
                         .build();
 
@@ -163,9 +168,16 @@ public class ChatActivity extends AppCompatActivity
             }
         };
     }
+    public Query sChatQuery()
+    {
+        String eventType = getIntent().getExtras().getString("eventType");
+        return FirebaseDatabase.getInstance().getReference().child(eventType).limitToLast(50);
+    }
+
 
     protected void onAddMessage(Chat chat) {
-        sChatQuery.getRef().push().setValue(chat, new DatabaseReference.CompletionListener() {
+
+        sChatQuery().getRef().push().setValue(chat, new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(DatabaseError error, DatabaseReference reference) {
                 if (error != null) {

@@ -218,10 +218,9 @@ public class MainActivity extends AppCompatActivity
     private void startChatActivity(IdpResponse response)
     {
         Intent intent = new Intent(this, ChatActivity.class);
-        startActivity(intent);
+        intent.putExtra("eventType", "chatsTwo");
 
-        //startActivity(LoginActivity.createIntent(MainActivity.this));
-        //startActivity(ChatActivity.createIntent(MainActivity.this, response));
+        startActivity(intent);
     }
 
     private void showSnackbar(@StringRes int errorMessageRes) {
