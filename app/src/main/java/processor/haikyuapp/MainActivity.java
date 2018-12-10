@@ -33,6 +33,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import processor.haikyuapp.Chat.ChatActivity;
 import processor.haikyuapp.bottomNavBar.BrowseFragment;
+import processor.haikyuapp.bottomNavBar.EventsFragment;
 import processor.haikyuapp.bottomNavBar.MyEventsFragment;
 import processor.haikyuapp.bottomNavBar.SettingsFragment;
 
@@ -99,7 +100,7 @@ public class MainActivity extends AppCompatActivity
                                 selectedFragment = MyEventsFragment.newInstance();
                                 break;
                             case R.id.action_item2:
-                                selectedFragment = BrowseFragment.newInstance();
+                                selectedFragment = EventsFragment.newInstance();
                                 break;
                             case R.id.action_item3:
                                 selectedFragment = SettingsFragment.newInstance();
