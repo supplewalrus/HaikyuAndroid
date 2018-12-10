@@ -22,16 +22,8 @@ import com.firebase.ui.auth.IdpResponse;
 import com.firebase.ui.auth.util.ExtraConstants;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.EmailAuthProvider;
-import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthProvider;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.GithubAuthProvider;
-import com.google.firebase.auth.GoogleAuthProvider;
-import com.google.firebase.auth.PhoneAuthProvider;
-import com.google.firebase.auth.TwitterAuthProvider;
-import com.google.firebase.auth.UserInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,19 +81,9 @@ public class MainActivity extends AppCompatActivity
         IdpResponse response = getIntent().getParcelableExtra(ExtraConstants.IDP_RESPONSE);
 
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
-        populateProfile(response);
-        //populateIdpToken(response);
-
-
-
-
-
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView)
                 findViewById(R.id.navigation);
-
-
 
 
         bottomNavigationView.setOnNavigationItemSelectedListener
@@ -157,71 +139,7 @@ public class MainActivity extends AppCompatActivity
                 });
     }
 
-    @OnClick(R.id.goto_chat)
-    public void goToChatActivity()
-    {
-        IdpResponse response = getIntent().getParcelableExtra(ExtraConstants.IDP_RESPONSE);
-        startChatActivity(response);
-    }
-
-
-    private void populateProfile(@Nullable IdpResponse response) {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user.getPhotoUrl() != null) {
-            Glide.with(this)
-                    .load(user.getPhotoUrl())
-                    .into(mUserProfilePicture);
-        }
-
-        mUserEmail.setText(
-                TextUtils.isEmpty(user.getEmail()) ? "No email" : user.getEmail());
-        mUserPhoneNumber.setText(
-                TextUtils.isEmpty(user.getPhoneNumber()) ? "No phone number" : user.getPhoneNumber());
-        mUserDisplayName.setText(
-                TextUtils.isEmpty(user.getDisplayName()) ? "No display name" : user.getDisplayName());
-
-        if (response == null) {
-            mIsNewUser.setVisibility(View.GONE);
-        } else {
-            mIsNewUser.setVisibility(View.VISIBLE);
-            //with this maybe go to different page???
-            mIsNewUser.setText(response.isNewUser() ? "New user" : "Existing user");
-        }
-    }
-
-
-//    private void populateIdpToken(@Nullable IdpResponse response) {
-//        String token = null;
-//        String secret = null;
-//        if (response != null) {
-//            token = response.getIdpToken();
-//            secret = response.getIdpSecret();
-//        }
-
-//        View idpTokenLayout = findViewById(R.id.idp_token_layout);
-//        if (token == null) {
-//            idpTokenLayout.setVisibility(View.GONE);
-//        } else {
-//            idpTokenLayout.setVisibility(View.VISIBLE);
-//            ((TextView) findViewById(R.id.idp_token)).setText(token);
-//        }
-//
-//        View idpSecretLayout = findViewById(R.id.idp_secret_layout);
-//        if (secret == null) {
-//            idpSecretLayout.setVisibility(View.GONE);
-//        } else {
-//            idpSecretLayout.setVisibility(View.VISIBLE);
-//            ((TextView) findViewById(R.id.idp_secret)).setText(secret);
-//        }
-//    }
-
-    private void startChatActivity(IdpResponse response)
-    {
-        Intent intent = new Intent(this, ChatActivity.class);
-        intent.putExtra("eventType", "chatsTwo");
-
-        startActivity(intent);
-    }
+//TOOK OUT IDP TOKEN STUFF LOOK IT UP IF NEEDED
 
     private void showSnackbar(@StringRes int errorMessageRes) {
         Snackbar.make(mRootView, errorMessageRes, Snackbar.LENGTH_LONG).show();
