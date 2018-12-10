@@ -121,4 +121,11 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="hint_image_preview_click">Click on a item to preview them.</string>
+
+    <string name="menu_preview">Gallery</string>
+
+    <string name="menu_album_select">Album</string>
+    <string name="menu_image_select">Image</string>
 </resources>

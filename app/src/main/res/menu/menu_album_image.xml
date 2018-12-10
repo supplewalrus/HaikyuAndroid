@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_eye"
+        android:icon="@drawable/album_ic_back_white"
+        android:orderInCategory="100"
+        android:title="@string/menu_preview"
+        app:showAsAction="always|withText"/>
+
+    <item
+        android:id="@+id/menu_select_image"
+        android:icon="@drawable/album_ic_image_camera_white"
+        android:orderInCategory="100"
+        android:title="@string/menu_image_select"
+        app:showAsAction="always|withText"/>
+
+</menu>
