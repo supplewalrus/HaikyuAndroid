@@ -2,6 +2,7 @@ package processor.haikyuapp.bottomNavBar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
@@ -13,8 +14,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
 import com.firebase.ui.auth.util.ExtraConstants;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -23,28 +27,18 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import processor.haikyuapp.Chat.ChatActivity;
 import processor.haikyuapp.LoginActivity;
+import processor.haikyuapp.MainActivity;
 import processor.haikyuapp.R;
 
 public class MyEventsFragment extends Fragment {
-    //@BindView(android.R.id.content) View mRootView;
 
     private static final String TAG = "EventsFragment";
-
-
-//    @BindView(R.id.user_profile_picture)
-//    ImageView mUserProfilePicture;
-//    @BindView(R.id.user_email)
-//    TextView mUserEmail;
-//    @BindView(R.id.user_display_name) TextView mUserDisplayName;
-//    @BindView(R.id.user_phone_number) TextView mUserPhoneNumber;
-//    @BindView(R.id.user_is_new) TextView mIsNewUser;
 
     @BindView(R.id.user_profile_picture) ImageView mUserProfilePicture;
     @BindView(R.id.user_email) TextView mUserEmail;
     @BindView(R.id.user_display_name) TextView mUserDisplayName;
     @BindView(R.id.user_phone_number) TextView mUserPhoneNumber;
     @BindView(R.id.user_is_new) TextView mIsNewUser;
-
 
 
     public static MyEventsFragment newInstance() {
