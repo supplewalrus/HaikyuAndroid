@@ -40,7 +40,7 @@ public class MyEventsFragment extends Fragment {
     @BindView(R.id.user_email) TextView mUserEmail;
     @BindView(R.id.user_display_name) TextView mUserDisplayName;
     @BindView(R.id.user_phone_number) TextView mUserPhoneNumber;
-    @BindView(R.id.user_is_new) TextView mIsNewUser;
+    //@BindView(R.id.user_is_new) TextView mIsNewUser;
 
 
     public static MyEventsFragment newInstance() {
@@ -64,12 +64,12 @@ public class MyEventsFragment extends Fragment {
         return view;
     }
 
-    @OnClick(R.id.goto_chat)
-    public void goToChatActivity()
-    {
-        IdpResponse response = getActivity().getIntent().getParcelableExtra(ExtraConstants.IDP_RESPONSE);
-        startChatActivity(response);
-    }
+//    @OnClick(R.id.goto_chat)
+//    public void goToChatActivity()
+//    {
+//        IdpResponse response = getActivity().getIntent().getParcelableExtra(ExtraConstants.IDP_RESPONSE);
+//        startChatActivity(response);
+//    }
 
     private void startChatActivity(IdpResponse response)
     {
@@ -96,13 +96,13 @@ public class MyEventsFragment extends Fragment {
         mUserDisplayName.setText(
                 TextUtils.isEmpty(user.getDisplayName()) ? "No display name" : user.getDisplayName());
 
-        if (response == null) {
-            mIsNewUser.setVisibility(View.GONE);
-        } else {
-            mIsNewUser.setVisibility(View.VISIBLE);
+        //if (response == null) {
+            //mIsNewUser.setVisibility(View.GONE);
+        //} else {
+            //mIsNewUser.setVisibility(View.VISIBLE);
             //with this maybe go to different page???
-            mIsNewUser.setText(response.isNewUser() ? "New user" : "Existing user");
-        }
+            //mIsNewUser.setText(response.isNewUser() ? "New user" : "Existing user");
+        //}
     }
 
     public void populateProfileImage()

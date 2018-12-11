@@ -26,7 +26,7 @@ import processor.haikyuapp.R;
 
 public class SetupActivity extends AppCompatActivity
 {
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "SetupActivity";
     @BindView(android.R.id.content)
     View mRootView;
 
@@ -36,8 +36,8 @@ public class SetupActivity extends AppCompatActivity
     TextView mUserEmail;
     @BindView(R.id.user_display_name) TextView mUserDisplayName;
     @BindView(R.id.user_phone_number) TextView mUserPhoneNumber;
-    @BindView(R.id.user_enabled_providers) TextView mEnabledProviders;
-    @BindView(R.id.user_is_new) TextView mIsNewUser;
+    //@BindView(R.id.user_enabled_providers) TextView mEnabledProviders;
+    //@BindView(R.id.user_is_new) TextView mIsNewUser;
 
 
     public static Intent createIntent(Context context, IdpResponse idpResponse)
