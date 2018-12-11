@@ -57,8 +57,8 @@ public class MainActivity extends AppCompatActivity
     @BindView(R.id.user_email) TextView mUserEmail;
     @BindView(R.id.user_display_name) TextView mUserDisplayName;
     @BindView(R.id.user_phone_number) TextView mUserPhoneNumber;
-    @BindView(R.id.user_enabled_providers) TextView mEnabledProviders;
-    @BindView(R.id.user_is_new) TextView mIsNewUser;
+    //@BindView(R.id.user_enabled_providers) TextView mEnabledProviders;
+    //@BindView(R.id.user_is_new) TextView mIsNewUser;
 
 
     public static Intent createIntent(Context context, IdpResponse idpResponse)
