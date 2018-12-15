@@ -36,27 +36,13 @@ import butterknife.OnClick;
 import processor.haikyuapp.R;
 
 /**
- * Class demonstrating how to setup a {@link RecyclerView} with an adapter while taking sign-in
- * states into consideration. Also demonstrates adding data to a ref and then reading it back using
- * the {@link FirebaseRecyclerAdapter} to build a simple chat app.
- * <p>
- * For a general intro to the RecyclerView, see <a href="https://developer.android.com/training/material/lists-cards.html">Creating
- * Lists</a>.
- *
- *
- *
- *
- * TO DO: PASS IN WHICH EVENT YOU CLICKED ON, THEN INSTEAD OF CALLING CHAT, CALL THAT SPECIFIC CHAT
+ * Starts a chat based on which activity you clicked on. Grabs info from correct
+ * place in firebase.
  */
 public class ChatActivity extends AppCompatActivity
         implements FirebaseAuth.AuthStateListener {
     private static final String TAG = "ChatActivity";
 
-    /**
-     * Get the last 50 chat messages.
-     */
-//    protected static final Query sChatQuery =
-//            FirebaseDatabase.getInstance().getReference().child("chats").limitToLast(50);
 
     @BindView(R.id.messagesList)
     RecyclerView mRecyclerView;
@@ -170,6 +156,7 @@ public class ChatActivity extends AppCompatActivity
     }
     public Query sChatQuery()
     {
+        //get last 50 chat messages.
         String eventType = getIntent().getExtras().getString("eventType");
         return FirebaseDatabase.getInstance().getReference().child(eventType).limitToLast(50);
     }
