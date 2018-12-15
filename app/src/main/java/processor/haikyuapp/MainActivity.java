@@ -33,9 +33,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import processor.haikyuapp.Chat.ChatActivity;
-import processor.haikyuapp.bottomNavBar.BrowseFragment;
-import processor.haikyuapp.bottomNavBar.EventsFragment;
 import processor.haikyuapp.bottomNavBar.MyEventsFragment;
+import processor.haikyuapp.bottomNavBar.ProfileFragment;
 import processor.haikyuapp.bottomNavBar.SettingsFragment;
 
 
@@ -98,10 +97,10 @@ public class MainActivity extends AppCompatActivity
                         switch (item.getItemId())
                         {
                             case R.id.action_item1:
-                                selectedFragment = MyEventsFragment.newInstance();
+                                selectedFragment = ProfileFragment.newInstance();
                                 break;
                             case R.id.action_item2:
-                                selectedFragment = EventsFragment.newInstance();
+                                selectedFragment = MyEventsFragment.newInstance();
                                 break;
                             case R.id.action_item3:
                                 selectedFragment = SettingsFragment.newInstance();
@@ -116,7 +115,7 @@ public class MainActivity extends AppCompatActivity
 
         //Manually displaying the first fragment - one time only
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame_layout, MyEventsFragment.newInstance());
+        transaction.replace(R.id.frame_layout, ProfileFragment.newInstance());
         transaction.commit();
 
         //Used to select an item programmatically
@@ -150,24 +149,6 @@ public class MainActivity extends AppCompatActivity
         super.onOptionsItemSelected(item);
         return true;
     }
-
-//    @OnClick(R.id.sign_out)
-//    public void signOut() {
-//        AuthUI.getInstance()
-//                .signOut(this)
-//                .addOnCompleteListener(new OnCompleteListener<Void>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<Void> task) {
-//                        if (task.isSuccessful()) {
-//                            startActivity(LoginActivity.createIntent(MainActivity.this));
-//                            finish();
-//                        } else {
-//                            Log.w(TAG, "signOut:failure", task.getException());
-//                            showSnackbar(R.string.sign_out_failed);
-//                        }
-//                    }
-//                });
-//    }
 
 //TOOK OUT IDP TOKEN STUFF LOOK IT UP IF NEEDED
 

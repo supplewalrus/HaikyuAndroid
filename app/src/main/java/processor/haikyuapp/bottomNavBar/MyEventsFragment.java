@@ -1,47 +1,27 @@
 package processor.haikyuapp.bottomNavBar;
 
-import android.content.Intent;
+import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.text.TextUtils;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.AdapterView;
+import android.widget.GridView;
+import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.firebase.ui.auth.AuthUI;
-import com.firebase.ui.auth.IdpResponse;
-import com.firebase.ui.auth.util.ExtraConstants;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FacebookAuthProvider;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserInfo;
+import java.util.ArrayList;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import processor.haikyuapp.Chat.ChatActivity;
-import processor.haikyuapp.LoginActivity;
-import processor.haikyuapp.MainActivity;
 import processor.haikyuapp.R;
 
-public class MyEventsFragment extends Fragment {
 
+public class MyEventsFragment extends Fragment
+{
     private static final String TAG = "EventsFragment";
-
-    @BindView(R.id.user_profile_picture) ImageView mUserProfilePicture;
-    @BindView(R.id.user_email) TextView mUserEmail;
-    @BindView(R.id.user_display_name) TextView mUserDisplayName;
-    @BindView(R.id.user_phone_number) TextView mUserPhoneNumber;
-    //@BindView(R.id.user_is_new) TextView mIsNewUser;
-
 
     public static MyEventsFragment newInstance() {
         MyEventsFragment fragment = new MyEventsFragment();
@@ -51,84 +31,65 @@ public class MyEventsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        initImageBitmaps();
+        Log.d(TAG, "onCreate: started.");
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_my_events, container, false);
-        ButterKnife.bind(this, view);
+    public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_my_events,container,false);
 
-        IdpResponse response = getActivity().getIntent().getParcelableExtra(ExtraConstants.IDP_RESPONSE);
-        populateProfile(response);
+        Log.d(TAG, "initRecyclerView: init recyclerview.");
+        RecyclerView recyclerView = view.findViewById(R.id.recyclerv_view);
+        recyclerView.setAdapter(new EventImageAdapter(getContext(), mNames, mImageUrls ));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         return view;
     }
 
-//    @OnClick(R.id.goto_chat)
-//    public void goToChatActivity()
-//    {
-//        IdpResponse response = getActivity().getIntent().getParcelableExtra(ExtraConstants.IDP_RESPONSE);
-//        startChatActivity(response);
+
+    //vars
+    private ArrayList<String> mNames = new ArrayList<>();
+    private ArrayList<String> mImageUrls = new ArrayList<>();
+
+    private void initImageBitmaps(){
+        Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
+
+        mImageUrls.add("https://c1.staticflickr.com/5/4636/25316407448_de5fbf183d_o.jpg");
+        mNames.add("Havasu Falls");
+
+        mImageUrls.add("https://i.redd.it/tpsnoz5bzo501.jpg");
+        mNames.add("Trondheim");
+
+        mImageUrls.add("https://i.redd.it/qn7f9oqu7o501.jpg");
+        mNames.add("Portugal");
+
+        mImageUrls.add("https://i.redd.it/j6myfqglup501.jpg");
+        mNames.add("Rocky Mountain National Park");
+
+
+        mImageUrls.add("https://i.redd.it/0h2gm1ix6p501.jpg");
+        mNames.add("Mahahual");
+
+        mImageUrls.add("https://i.redd.it/k98uzl68eh501.jpg");
+        mNames.add("Frozen Lake");
+
+
+        mImageUrls.add("https://i.redd.it/glin0nwndo501.jpg");
+        mNames.add("White Sands Desert");
+
+        mImageUrls.add("https://i.redd.it/obx4zydshg601.jpg");
+        mNames.add("Austrailia");
+
+        mImageUrls.add("https://i.imgur.com/ZcLLrkY.jpg");
+        mNames.add("Washington");
+    }
+
+
+//    @Override
+//    public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+//        View view = inflater.inflate(R.layout.fragment_my_events,container,false);
+//        GridView gridView = (GridView) view.findViewById(R.id.photogridview);
+//        gridView.setAdapter(new EventImageAdapter(view.getContext())); // uses the view to get the context instead of getActivity().
+//        return view;
 //    }
-
-    private void startChatActivity(IdpResponse response)
-    {
-        Intent intent = new Intent(getActivity(), ChatActivity.class);
-        intent.putExtra("eventType", "chatsTwo");
-
-        startActivity(intent);
-    }
-
-    private void populateProfile(@Nullable IdpResponse response) {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        Log.d(TAG, "populateProfile: ");
-//        if (user.getPhotoUrl() != null) {
-//            Glide.with(this)
-//                    .load(user.getPhotoUrl())
-//                    .into(mUserProfilePicture);
-//        }
-        populateProfileImage();
-
-        mUserEmail.setText(
-                TextUtils.isEmpty(user.getEmail()) ? "No email" : user.getEmail());
-        mUserPhoneNumber.setText(
-                TextUtils.isEmpty(user.getPhoneNumber()) ? "No phone number" : user.getPhoneNumber());
-        mUserDisplayName.setText(
-                TextUtils.isEmpty(user.getDisplayName()) ? "No display name" : user.getDisplayName());
-
-        //if (response == null) {
-            //mIsNewUser.setVisibility(View.GONE);
-        //} else {
-            //mIsNewUser.setVisibility(View.VISIBLE);
-            //with this maybe go to different page???
-            //mIsNewUser.setText(response.isNewUser() ? "New user" : "Existing user");
-        //}
-    }
-
-    public void populateProfileImage()
-    {
-        String facebookUserId = "";
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        //ImageView profilePicture = (ImageView) findViewById(R.id.image_profile_picture);
-
-        // find the Facebook profile and get the user's id
-        for(UserInfo profile : user.getProviderData()) {
-            // check if the provider id matches "facebook.com"
-            if(FacebookAuthProvider.PROVIDER_ID.equals(profile.getProviderId())) {
-                facebookUserId = profile.getUid();
-            }
-        }
-
-        // construct the URL to the profile picture, with a custom height
-        // alternatively, use '?type=small|medium|large' instead of ?height=
-        String photoUrl = "https://graph.facebook.com/" + facebookUserId + "/picture?height=500";
-
-        // (optional) use Picasso to download and show to image
-        //Picasso.with(this).load(photoUrl).into(profilePicture);
-        if (user.getPhotoUrl() != null) {
-            Glide.with(this)
-                    .load(photoUrl)
-                    .into(mUserProfilePicture);
-        }
-    }
 }
