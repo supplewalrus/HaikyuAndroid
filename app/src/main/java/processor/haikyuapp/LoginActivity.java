@@ -156,7 +156,8 @@ public class LoginActivity extends AppCompatActivity
 
     private void startSetupActivity(IdpResponse response)
     {
-        startActivity(SetupActivity.createIntent(this, response));
+        startActivity(MainActivity.createIntent(this, response));
+        //startActivity(SetupActivity.createIntent(this, response));
     }
 
     private List<IdpConfig> getSelectedProviders()

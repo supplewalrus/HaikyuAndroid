@@ -28,6 +28,8 @@ public class ChatHolder extends RecyclerView.ViewHolder {
     private final LinearLayout mMessage;
     private final int mGreen300;
     private final int mGray300;
+    private final int mWhite;
+    private final int mBlack;
 
     public ChatHolder(View itemView) {
         super(itemView);
@@ -37,8 +39,10 @@ public class ChatHolder extends RecyclerView.ViewHolder {
         mRightArrow = itemView.findViewById(R.id.right_arrow);
         mMessageContainer = itemView.findViewById(R.id.message_container);
         mMessage = itemView.findViewById(R.id.message);
-        mGreen300 = ContextCompat.getColor(itemView.getContext(), R.color.material_green_300);
+        mGreen300 = ContextCompat.getColor(itemView.getContext(), R.color.headings);
         mGray300 = ContextCompat.getColor(itemView.getContext(), R.color.material_gray_300);
+        mWhite = ContextCompat.getColor(itemView.getContext(), R.color.white);
+        mBlack = ContextCompat.getColor(itemView.getContext(), R.color.black);
     }
 
     public void bind(AbstractChat chat) {
@@ -59,19 +63,24 @@ public class ChatHolder extends RecyclerView.ViewHolder {
 
     private void setIsSender(boolean isSender) {
         final int color;
+        final int textColor;
         if (isSender) {
             color = mGreen300;
+            textColor = mWhite;
             mLeftArrow.setVisibility(View.GONE);
             mRightArrow.setVisibility(View.VISIBLE);
             mMessageContainer.setGravity(Gravity.END);
         } else {
             color = mGray300;
+            textColor = mBlack;
             mLeftArrow.setVisibility(View.VISIBLE);
             mRightArrow.setVisibility(View.GONE);
             mMessageContainer.setGravity(Gravity.START);
         }
 
         ((GradientDrawable) mMessage.getBackground()).setColor(color);
+        mTextField.setTextColor(textColor);
+        mNameField.setTextColor(textColor);
         ((RotateDrawable) mLeftArrow.getBackground()).getDrawable()
                 .setColorFilter(color, PorterDuff.Mode.SRC);
         ((RotateDrawable) mRightArrow.getBackground()).getDrawable()
