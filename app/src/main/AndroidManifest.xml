@@ -27,9 +27,6 @@
         </activity>
         <activity android:name=".Chat.ChatActivity">
         </activity>
-        <activity
-            android:name=".Chat.ChatIndexActivity"
-            android:label="@string/title_realtime_database_activity"/>
         <activity android:name=".setup.SetupActivity">
         </activity>
     </application>

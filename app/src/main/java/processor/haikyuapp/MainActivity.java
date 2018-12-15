@@ -102,9 +102,9 @@ public class MainActivity extends AppCompatActivity
                             case R.id.action_item2:
                                 selectedFragment = MyEventsFragment.newInstance();
                                 break;
-                            case R.id.action_item3:
-                                selectedFragment = SettingsFragment.newInstance();
-                                break;
+//                            case R.id.action_item3:
+//                                selectedFragment = SettingsFragment.newInstance();
+//                                break;
                         }
                         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                         transaction.replace(R.id.frame_layout, selectedFragment);
