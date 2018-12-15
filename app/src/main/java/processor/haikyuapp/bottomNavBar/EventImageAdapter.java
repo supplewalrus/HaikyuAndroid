@@ -68,7 +68,7 @@ public class EventImageAdapter extends RecyclerView.Adapter<EventImageAdapter.Vi
                 Toast.makeText(mContext, mImageNames.get(position), Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(mContext, ChatActivity.class);
-                intent.putExtra("eventType", "chat");
+                intent.putExtra("eventType", mImageNames.get(position));
                 intent.putExtra("image_url", mImages.get(position));
                 intent.putExtra("image_name", mImageNames.get(position));
                 mContext.startActivity(intent);

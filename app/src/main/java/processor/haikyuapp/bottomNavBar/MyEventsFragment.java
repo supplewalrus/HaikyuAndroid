@@ -55,41 +55,84 @@ public class MyEventsFragment extends Fragment
         Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
 
         mImageUrls.add("https://c1.staticflickr.com/5/4636/25316407448_de5fbf183d_o.jpg");
-        mNames.add("Havasu Falls");
+        mNames.add("Adventures");
 
         mImageUrls.add("https://i.redd.it/tpsnoz5bzo501.jpg");
-        mNames.add("Trondheim");
+        mNames.add("Board and Card Games");
 
         mImageUrls.add("https://i.redd.it/qn7f9oqu7o501.jpg");
-        mNames.add("Portugal");
+        mNames.add("Boating");
 
         mImageUrls.add("https://i.redd.it/j6myfqglup501.jpg");
-        mNames.add("Rocky Mountain National Park");
-
+        mNames.add("Cultural");
 
         mImageUrls.add("https://i.redd.it/0h2gm1ix6p501.jpg");
-        mNames.add("Mahahual");
+        mNames.add("Dancing");
 
         mImageUrls.add("https://i.redd.it/k98uzl68eh501.jpg");
-        mNames.add("Frozen Lake");
-
+        mNames.add("Football");
 
         mImageUrls.add("https://i.redd.it/glin0nwndo501.jpg");
-        mNames.add("White Sands Desert");
+        mNames.add("Frisbee Golf");
 
         mImageUrls.add("https://i.redd.it/obx4zydshg601.jpg");
-        mNames.add("Austrailia");
+        mNames.add("Hiking");
 
         mImageUrls.add("https://i.imgur.com/ZcLLrkY.jpg");
-        mNames.add("Washington");
+        mNames.add("Longboarding");
+
+
+
+        mImageUrls.add("https://c1.staticflickr.com/5/4636/25316407448_de5fbf183d_o.jpg");
+        mNames.add("Miscellaneous");
+
+        mImageUrls.add("https://i.redd.it/tpsnoz5bzo501.jpg");
+        mNames.add("Mountain Biking");
+
+        mImageUrls.add("https://i.redd.it/qn7f9oqu7o501.jpg");
+        mNames.add("Movies and TV");
+
+        mImageUrls.add("https://i.redd.it/j6myfqglup501.jpg");
+        mNames.add("Reading");
+
+        mImageUrls.add("https://i.redd.it/0h2gm1ix6p501.jpg");
+        mNames.add("Rock Climbing");
+
+        mImageUrls.add("https://i.redd.it/k98uzl68eh501.jpg");
+        mNames.add("Jogging");
+
+        mImageUrls.add("https://i.redd.it/glin0nwndo501.jpg");
+        mNames.add("Ski and Snowboarding");
+
+        mImageUrls.add("https://i.redd.it/obx4zydshg601.jpg");
+        mNames.add("Slack Lining");
+
+        mImageUrls.add("https://i.imgur.com/ZcLLrkY.jpg");
+        mNames.add("Soccer");
+
+
+
+
+        mImageUrls.add("https://c1.staticflickr.com/5/4636/25316407448_de5fbf183d_o.jpg");
+        mNames.add("Social");
+
+        mImageUrls.add("https://i.redd.it/tpsnoz5bzo501.jpg");
+        mNames.add("Spikeball");
+
+        mImageUrls.add("https://i.redd.it/qn7f9oqu7o501.jpg");
+        mNames.add("Study Groups");
+
+        mImageUrls.add("https://i.redd.it/j6myfqglup501.jpg");
+        mNames.add("Tennis");
+
+        mImageUrls.add("https://i.redd.it/0h2gm1ix6p501.jpg");
+        mNames.add("Ultimate Frisbee");
+
+        mImageUrls.add("https://i.redd.it/k98uzl68eh501.jpg");
+        mNames.add("Video Games");
+
+        mImageUrls.add("https://i.redd.it/glin0nwndo501.jpg");
+        mNames.add("Yoga");
     }
 
-
-//    @Override
-//    public View onCreateView (LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-//        View view = inflater.inflate(R.layout.fragment_my_events,container,false);
-//        GridView gridView = (GridView) view.findViewById(R.id.photogridview);
-//        gridView.setAdapter(new EventImageAdapter(view.getContext())); // uses the view to get the context instead of getActivity().
-//        return view;
-//    }
 }
