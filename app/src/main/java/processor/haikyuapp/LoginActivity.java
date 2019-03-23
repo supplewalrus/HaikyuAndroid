@@ -76,7 +76,8 @@ public class LoginActivity extends AppCompatActivity
         startActivityForResult(
                 AuthUI.getInstance().createSignInIntentBuilder()
                         //.setTheme(R.style.MintTheme)
-                        .setLogo(R.drawable.ic_googleg_color_144dp)
+//                        .setTheme(R.style.WhiteTheme)
+                        .setLogo(R.mipmap.uticklogo)
                         .setAvailableProviders(getSelectedProviders())
                         .setTosAndPrivacyPolicyUrls(GOOGLE_TOS_URL,
                                 GOOGLE_PRIVACY_POLICY_URL)
@@ -168,7 +169,9 @@ public class LoginActivity extends AppCompatActivity
                 .setPermissions(getFacebookPermissions())
                 .build());
 
+//        selectedProviders.add(new IdpConfig.GoogleBuilder().build());
         selectedProviders.add(new IdpConfig.PhoneBuilder().build());
+//        selectedProviders.add(new IdpConfig.TwitterBuilder().build());
 
         return selectedProviders;
     }

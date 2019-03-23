@@ -46,7 +46,9 @@ tools:context="processor.haikyuapp.Chat.ChatActivity">
         android:imeOptions="actionDone"
         android:importantForAutofill="no"
         android:inputType="text"
-        tools:ignore="UnusedAttribute" />
+        tools:ignore="UnusedAttribute"/>
+        android:singleLine="true"
+        <!--tools:ignore="UnusedAttribute"/>-->
 
     <Button
         android:id="@+id/sendButton"
@@ -54,7 +56,9 @@ tools:context="processor.haikyuapp.Chat.ChatActivity">
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:text="@string/send" />
+        android:background="@color/colorPrimary"
+        android:text="@string/send"
+        android:textColor="@color/white"/>
 
 </LinearLayout>
 

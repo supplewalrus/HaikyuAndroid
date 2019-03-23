@@ -22,4 +22,15 @@
         android:layout_marginLeft="30dp"
         android:textSize="17sp"/>
 
+    <View
+        android:id="@+id/lineBottom"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/image"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:background="@android:color/black"
+        android:paddingTop="5dp"/>
+
+
 </RelativeLayout>
