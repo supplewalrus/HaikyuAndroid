@@ -28,7 +28,9 @@ tools:context="processor.haikyuapp.LoginActivity">
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:drawableTop="@drawable/ic_googleg_color_144dp"/>
+            android:drawableTop="@mipmap/uticklogo"/>
+            <!--android:drawableTop="@drawable/ic_googleg_color_144dp"/>-->
+            <!--android:drawableTop="@drawable/ic_googleg_color_144dp"/>-->
             <!--android:text="@string/launch_title" />-->
 
 
