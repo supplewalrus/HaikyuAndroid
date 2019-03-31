@@ -66,7 +66,7 @@
 
     <!-- Bottom Nav Bar -->
     <string name="myEvents">My Events</string>
-    <string name="myActivities">My Activities</string>
+    <string name="myActivities">Activities Nearby</string>
     <string name="browse">Browse</string>
     <string name="settings">Settings</string>
     <string name="profile">Profile</string>

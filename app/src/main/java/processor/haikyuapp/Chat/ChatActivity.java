@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -56,13 +57,19 @@ public class ChatActivity extends AppCompatActivity
     @BindView(R.id.emptyTextView)
     TextView mEmptyListMessage;
 
-
     @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
         ButterKnife.bind(this);
+        Bundle extras = this.getIntent().getExtras();
+        if (extras != null) {
+            this.setTitle(extras.getString("image_name"));
+        }
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(true);
 
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -73,6 +80,12 @@ public class ChatActivity extends AppCompatActivity
                 onSendClick();
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(android.view.MenuItem item){
+        this.finish();
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

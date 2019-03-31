@@ -5,11 +5,32 @@ xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 tools:context="processor.haikyuapp.Chat.ChatActivity">
-
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingLeft="16dp"
+        android:background="@color/grey"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:text="There are currently 5 people on this chat."
+            android:textColor="@color/white"
+            android:textSize="14dp"/>
+    </LinearLayout>
 <TextView
     android:id="@+id/emptyTextView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginTop="30dp"
     android:padding="16dp"
     android:text="@string/start_chatting" />
 
@@ -20,6 +41,7 @@ tools:context="processor.haikyuapp.Chat.ChatActivity">
     android:layout_alignParentStart="true"
     android:layout_alignParentLeft="true"
     android:layout_alignParentTop="true"
+    android:layout_marginTop="30dp"
     android:layout_above="@+id/footer"
     android:clipToPadding="false"
     android:padding="16dp"
