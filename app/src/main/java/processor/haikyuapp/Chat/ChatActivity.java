@@ -24,6 +24,8 @@ import com.firebase.ui.auth.util.ExtraConstants;
 import com.firebase.ui.auth.util.ui.ImeHelper;//this is??
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+
+import processor.haikyuapp.FakeLoginActivity;
 import processor.haikyuapp.utils.SignInResultNotifier;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseError;

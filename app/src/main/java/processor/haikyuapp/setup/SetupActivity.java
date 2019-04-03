@@ -16,9 +16,9 @@ import com.google.firebase.auth.FirebaseUser;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import processor.haikyuapp.LoginActivity;
 import processor.haikyuapp.MainActivity;
 import processor.haikyuapp.R;
+import processor.haikyuapp.FakeLoginActivity;
 
 /**
  * Created by brand on 12/4/2018.
@@ -55,7 +55,7 @@ public class SetupActivity extends AppCompatActivity
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser == null) {
             //IdpResponse response = getIntent().getParcelableExtra(ExtraConstants.IDP_RESPONSE);
-            startActivity(LoginActivity.createIntent(this));
+            startActivity(FakeLoginActivity.createIntent(this));
             finish();
             return;
         }

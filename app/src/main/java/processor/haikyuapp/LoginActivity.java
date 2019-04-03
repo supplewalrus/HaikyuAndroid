@@ -170,7 +170,7 @@ public class LoginActivity extends AppCompatActivity
                 .build());
 
 //        selectedProviders.add(new IdpConfig.GoogleBuilder().build());
-        selectedProviders.add(new IdpConfig.PhoneBuilder().build());
+//        selectedProviders.add(new IdpConfig.PhoneBuilder().build());
 //        selectedProviders.add(new IdpConfig.TwitterBuilder().build());
 
         return selectedProviders;
