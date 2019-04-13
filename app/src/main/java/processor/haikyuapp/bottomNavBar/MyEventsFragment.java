@@ -32,6 +32,7 @@ public class MyEventsFragment extends Fragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initImageBitmaps();
+        getActivity().setTitle("Activities Nearby");
         Log.d(TAG, "onCreate: started.");
     }
 

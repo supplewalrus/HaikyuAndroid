@@ -67,9 +67,12 @@
     <!-- Bottom Nav Bar -->
     <string name="myEvents">My Events</string>
     <string name="myActivities">Activities Nearby</string>
+    <string name="recentActivites">Recent Activities</string>
     <string name="browse">Browse</string>
     <string name="settings">Settings</string>
     <string name="profile">Profile</string>
+    <string name="boating"><u>Boating,</u></string>
+    <string name="dancing"><u> Dancing</u></string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

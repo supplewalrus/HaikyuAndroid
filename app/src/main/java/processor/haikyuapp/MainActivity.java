@@ -24,6 +24,7 @@ import com.google.firebase.auth.FirebaseUser;
 import butterknife.BindView;
 import processor.haikyuapp.bottomNavBar.MyEventsFragment;
 import processor.haikyuapp.bottomNavBar.ProfileFragment;
+import processor.haikyuapp.bottomNavBar.RecentEvents;
 
 
 import android.support.design.widget.BottomNavigationView;
@@ -79,6 +80,9 @@ public class MainActivity extends AppCompatActivity
                                 break;
                             case R.id.action_item2:
                                 selectedFragment = MyEventsFragment.newInstance();
+                                break;
+                            case R.id.action_item3:
+                                selectedFragment = RecentEvents.newInstance();
                                 break;
 //                            case R.id.action_item3:
 //                                selectedFragment = SettingsFragment.newInstance();

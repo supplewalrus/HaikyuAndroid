@@ -22,7 +22,7 @@ tools:context="processor.haikyuapp.Chat.ChatActivity">
             android:layout_height="match_parent"
             android:gravity="center"
             android:textAlignment="center"
-            android:text="There are currently 5 people on this chat."
+            android:text="There are 5 people in this chat."
             android:textColor="@color/white"
             android:textSize="14dp"/>
     </LinearLayout>
